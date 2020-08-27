@@ -4,7 +4,9 @@ from os import listdir, remove
 from os.path import join, isfile
 
 test_folder = "test_picture.jpg"
-test = True
+
+
+test = input("test?: ")
 index = 1
 # ask for file/folder path to image
 if test != True:
