@@ -3,7 +3,7 @@ import cv2
 from os import listdir, remove
 from os.path import join, isfile
 
-test_folder = "C://Users//jackl//OneDrive//Pictures//picture_editor_test//test_picture.jpg"
+test_folder = "test_picture.jpg"
 test = True
 index = 1
 # ask for file/folder path to image
