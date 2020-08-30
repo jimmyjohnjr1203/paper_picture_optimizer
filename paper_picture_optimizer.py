@@ -3,7 +3,7 @@ import cv2
 from os import listdir, remove
 from os.path import join, isfile
 
-test_folder = "test_picture.jpg"
+test_folder = "test_picture_LI.jpg"
 
 
 test = input("test?: ")
