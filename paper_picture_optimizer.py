@@ -34,6 +34,7 @@ for path in file_list:
             #cv2.imshow('original', img)
         # convert to gray for better cropping
         gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+        gray = cv2.equalizeHist(gray) # equalize histogram for better cropping of brighter backgrounds
         gray_brighter = gray>127
         # crop from top and bottom
         row_check = np.any(gray_brighter,1)
