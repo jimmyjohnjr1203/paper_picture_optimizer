@@ -59,18 +59,33 @@ for path in file_list:
         #-----Converting image from LAB Color model to RGB model--------------------
         img = cv2.cvtColor(limg, cv2.COLOR_LAB2BGR)
         # end credit
+        
+        # credit Soroush on Stack Overflow
+        def unsharp_mask(image, kernel_size=(5, 5), sigma=1.0, amount=3.0, threshold=5):
+            """Return a sharpened version of the image, using an unsharp mask."""
+            blurred = cv2.GaussianBlur(image, kernel_size, sigma)
+            sharpened = float(amount + 1) * image - float(amount) * blurred
+            sharpened = np.maximum(sharpened, np.zeros(sharpened.shape))
+            sharpened = np.minimum(sharpened, 255 * np.ones(sharpened.shape))
+            sharpened = sharpened.round().astype(np.uint8)
+            if threshold > 0:
+                low_contrast_mask = np.absolute(image - blurred) < threshold
+                np.copyto(sharpened, image, where=low_contrast_mask)
+            return sharpened
+        # end credit
+        img = unsharp_mask(img)
         contrast = 2
         brightness = -100
         img = cv2.convertScaleAbs(img, alpha=contrast, beta=brightness)
         # save image in renamed file
         if test == False:
-            cv2.imwrite(file_name_start + "_page" + str(index), img)
+            cv2.imwrite(file_name_start + "//page" + str(index) +".jpg", img)
             remove(path)
             index += 1
         else:
             #print(str(np.shape(img)))
             cv2.imshow('final', img)
-            cv2.imwrite(path+'.jpg', img)
+            cv2.imwrite(path.strip(".jpg")+'_final.jpg', img)
             #cv2.imshow('grayscale final', gray)
             if cv2.waitKey(0) & 0xff == 27:
                 cv2.destroyAllWindows()
