@@ -1,5 +1,5 @@
 # paper_picture_optimizer
-Takes pictures of paper on a black surface (not required but helps) and optimizes it for reading by cropping, adjusting the brightness, and adjusting the contrast. Also renames the file FOLDER_NAME_page1 for however many pictures are in folder (It doesn't rename files). 
+Takes pictures of paper on a black surface (not required but helps) and optimizes it for reading by cropping, adjusting the brightness, and adjusting the contrast. Also renames the file FOLDERNAME_page1 for however many pictures are in folder or ORIGINALFILENAME_optimized.ORIGINALENDING if you chose a file. 
 
 # Instructions
 1) Run the .py file
