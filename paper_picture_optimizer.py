@@ -16,6 +16,7 @@ def optimize(*args):
         file_path = normpath(input_path)
         if file_check.instate(['selected']):
             file_list = file_path
+            file_name = file_path.rpartition('\\')[2]
         elif folder_check.instate(['selected']):
             file_list = [join(file_path, f) for f in listdir(file_path) if isfile(join(file_path, f))]
             file_name_start = file_path
@@ -48,6 +49,8 @@ def optimize(*args):
         if path.endswith(".jpg") or path.endswith(".png") or path.endswith(".jpeg"):
             # load image
             img = cv.imread(path)
+            if test == True:
+                cv.imshow('original', img)
             #original_width = np.size(img, 1)
             #original_height = np.size(img, 0)
             # convert to gray for better cropping
@@ -99,12 +102,15 @@ def optimize(*args):
             brightness = -80
             img = cv.convertScaleAbs(img, alpha=contrast, beta=brightness)
             # save image in renamed file
-            if test == False:
+            if test == False and folder_check.instate(['selected']):
                 new_name = file_name_start + '\\' + folder_name + "_page" + str(index) + ".jpg"
                 print(new_name)
                 cv.imwrite(new_name, img)
-                #remove(path)
+                #remove(path) # Uncomment this if you want to remove the old file
                 index += 1
+            elif test == False and file_check.instate(['selected']):
+                new_name = file_name.rpartition('.')[0] + '_optimized.' + file_name.rpartition('.')[2]
+                cv.imwrite(new_name, img)
             else:
                 #print(str(np.shape(img)))
                 cv.imshow('final', img)
